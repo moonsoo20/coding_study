@@ -1,18 +1,20 @@
-def dfs(n, lst):
-    if n==M:    
-        ans.append(lst)
+
+
+N,M=map(int,input().split())
+visited=[False]*(N+1)
+arr=[]
+
+def btk(depth):
+    if depth==M:
+        print(' '.join(map(str,arr)))
         return
 
-    for j in range(1, N+1):
-        if v[j]==0:
-            v[j]=1
-            dfs(n+1, lst+[j])
-            v[j]=0
+    for i in range(1,N+1):
+        if not visited[i]:
+            arr.append(i)
+            visited[i]=True
+            btk(depth+1)
+            arr.pop()
+            visited[i] = False
 
-N, M = map(int, input().split())
-ans = []           
-v = [0]*(N+1)       
-
-dfs(0, [])
-for lst in ans:
-    print(*lst)
+btk(0)
